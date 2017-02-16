@@ -10,7 +10,10 @@ var $container = $('#container');
 var $top = $('.top');
 var $sidePanel = $('.side-panel');
 
-var $top2 = $('.top2');
+var $hit = $('.hit');
+var $stand = $('.stand');
+var $double = $('.double');
+
 var $total = $('.total');
 var color;
 var a = 0;
@@ -30,9 +33,12 @@ $container.css({width: w/1.5+'px', height: h/2.5+'px',});
 $container.css('background-color', 'green');
 $sidePanel.css({height: h/2.5+'px'});
 $top.css({width: w/2+'px', height: h/2.5+'px', border: '2px solid'});
-$top2.css({width: '50px', height: '50px', border: '2px solid'});
-$top2.text("HIT");
-
+$hit.css({width: '50px', height: '50px', border: '2px solid'});
+$hit.text("HIT");
+$stand.css({width: '80px', height: '50px', border: '2px solid'});
+$stand.text("STAND");
+$double.css({width: '80px', height: '50px', border: '2px solid'});
+$double.text("DOUBLE");
 
 //////////////////////////////////////////////  setting html   ----------------
 
@@ -118,12 +124,15 @@ $top2.text("HIT");
 
   function Deck() {
     this.cards = function() {
+      var num2 = 10;
       var draw = Math.floor(Math.random() * 4);
       var num = Math.floor(Math.random() * 12);
       if(num < 3){ num = Math.floor(Math.random() * 11)}
-      if(num === 11 || num === 12){num = special[draw]};
-      img =  num+"_of_"+suits[draw]+".png" ;
-      return img
+      if(num === 11 || num === 12){num = special[draw]; player1.val(num2)};
+      img =  num+"_of_"+suits[draw]+".png";
+      if(typeof num === "number"){player1.val(num)};
+        console.log(player1.total)
+      return img;
     }
   }////// Deck object end
 
@@ -135,8 +144,14 @@ $top2.text("HIT");
 
 
   function Player() {
+
         this.totalHand = 5;
         this.currentCards = [];
+        this.total = 0
+        this.val = function(v) {
+               this.total += v;
+              return this.total;
+        }
         this.hand = function() {
           var cardOne = houseDeck();
           var cardTwo = houseDeck();
@@ -181,14 +196,19 @@ $top2.text("HIT");
 
 
   };////// Player object end
+  Player.prototype = Deck;
+  console.log(Player.prototype)
  var player1 = new Player();
 player1.hand();
 player1.display(player1.currentCards);
+var houseDeckTwo = player1.cards();
 console.log(player1.currentCards.length)
- console.log(player1);
+ console.log(player1.__proto__);
+ console.log(houseDeckTwo)
 
 
-setTimeout(player1.hit.bind(player1), 3000);  ///// got help from  other instructor..recommend bind()..
+$hit.click(function() {player1.hit()});
+// setTimeout(player1.hit.bind(player1), 3000);  ///// got help from  other instructor..recommend bind()..
 ////// since im using setTimout..this within my player1.hit function would refer to the window object
 ////// iuse the method bind() to make sure "this" within my function refers to my object , which is player1 !
 
