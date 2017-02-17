@@ -123,23 +123,30 @@ $double.text("DOUBLE");
        //    $top.append($div3);
 
   function Deck() {
+    this.total = 0;
+    this.val = function(v) {
+               this.total += v;
+              return this.total;
+        }
     this.cards = function() {
       var num2 = 10;
       var draw = Math.floor(Math.random() * 4);
       var num = Math.floor(Math.random() * 12);
+      if(num < 2){ num = Math.floor(Math.random() * 11)}
       if(num < 3){ num = Math.floor(Math.random() * 11)}
-      if(num === 11 || num === 12){num = special[draw]; player1.val(num2)};
+        // debugger
+      if(num === 11 || num === 12){num = special[draw]; this.val(num2)};
       img =  num+"_of_"+suits[draw]+".png";
-      if(typeof num === "number"){player1.val(num)};
-        console.log(player1.total)
+      if(typeof num === "number"){this.val(num)};
+        console.log(this.total)
       return img;
     }
   }////// Deck object end
 
 
 
-  var fullDeck = new Deck();
-  var houseDeck = fullDeck.cards;
+  // var fullDeck = new Deck();
+  // var houseDeck = fullDeck.cards;
   ///////////// deck of 52 random cards
 
 
@@ -147,14 +154,14 @@ $double.text("DOUBLE");
 
         this.totalHand = 5;
         this.currentCards = [];
-        this.total = 0
-        this.val = function(v) {
-               this.total += v;
-              return this.total;
-        }
+        this.deck = new Deck();
+
         this.hand = function() {
-          var cardOne = houseDeck();
-          var cardTwo = houseDeck();
+          // var cardOne = houseDeck();
+          // var cardTwo = houseDeck();
+          // debugger
+           var cardOne = this.deck.cards();
+          var cardTwo = this.deck.cards();
           this.currentCards.push(cardOne);
           this.currentCards.push(cardTwo);
             console.log(this.currentCards);
@@ -168,7 +175,8 @@ $double.text("DOUBLE");
           console.log()
           console.log("currentCards: "+c+", totalHand: "+h)
                 if(this.currentCards.length < this.totalHand){
-                  var nextCard = houseDeck();
+                  // var nextCard = houseDeck();
+                  var nextCard = this.deck.cards();
                   this.currentCards.push(nextCard);
                   this.display(this.currentCards);
                   console.log(this.currentCards);
@@ -196,15 +204,19 @@ $double.text("DOUBLE");
 
 
   };////// Player object end
-  Player.prototype = Deck;
-  console.log(Player.prototype)
- var player1 = new Player();
+  // Player.prototype = fullDeck;
+
+  // console.log(Player.prototype);
+
+var player1 = new Player();
+console.log(player1);
+
 player1.hand();
 player1.display(player1.currentCards);
-var houseDeckTwo = player1.cards();
+var player1Cards = player1.deck;
 console.log(player1.currentCards.length)
- console.log(player1.__proto__);
- console.log(houseDeckTwo)
+console.log(player1.__proto__);
+console.log(player1Cards.cards);
 
 
 $hit.click(function() {player1.hit()});
@@ -218,9 +230,10 @@ $hit.click(function() {player1.hit()});
 function House() {
         this.totalHand = 5;
         this.currentCards = [];
+        this.deck = new Deck();
         this.hand = function() {
-          var cardOne = houseDeck();
-          var cardTwo = houseDeck();
+          var cardOne = this.deck.cards();
+          var cardTwo = this.deck.cards();;
           this.currentCards.push(cardOne);
           this.currentCards.push(cardTwo);
             console.log(this.currentCards);
@@ -229,7 +242,7 @@ function House() {
 
         this.hit = function() {
           if(this.currentCards.length < this.totalHand){
-                  var nextCard = houseDeck();
+                  var nextCard = this.deck.cards();
                   this.currentCards.push(nextCard);
                   this.display(this.currentCards);
                   return this.currentCards;
