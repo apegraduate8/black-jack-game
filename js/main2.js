@@ -33,97 +33,31 @@ $container.css({width: w/1.5+'px', height: h/2.5+'px',});
 $container.css('background-color', 'green');
 $sidePanel.css({height: h/2.5+'px'});
 $top.css({width: w/2+'px', height: h/2.5+'px', border: '2px solid'});
-$hit.css({width: '50px', height: '50px', border: '3px solid'});
-$hit.text("HIT");
-$stand.css({width: '80px', height: '50px', border: '3px solid'});
-$stand.text("STAND");
-$double.css({width: '80px', height: '50px', border: '3px solid'});
-$double.text("DOUBLE");
+
+
+
 
 //////////////////////////////////////////////  setting html   ----------------
 
-
-
-// function Box() {
-//   this.remove = function(){
-//         this.currentBox.remove();
-//   };
-
-//   this.color = mixColors[a];
-//   this.currentBox = ""
-//   this.bottomCreat = function() {
-//         var $div = $('<div>').addClass('color');
-//         $div.css('border', '2px solid '+this.color);
-//         $div.attr("thisColor", this.color); ////added specific attribute called "thisColor"
-//         $container.append($div);
-//         this.currentBox = $div;
-//         a++;
-//   }
-//   this.topCreat = function() {
-//          var $div2 = $('<div>').addClass('color2');
-//         $div2.css('border', '2px solid '+this.color);
-//         $div2.attr("thisColor", this.color); ////added specific attribute called "thisColor"
-//         $top.append($div2);
-//         this.currentBox = $div2;
-//         topBoxes.colors.push(this.color);
-//         b++;
-//         console.log(topBoxes.colors)
-//   }
-
-// }
-
-// function Top(father) {
-//   this.father = father;
-//   this.colors = [];
-//   this.checkIt = function() {
-
-//     if(this.colors === 4){this.father[0].remove()}
-//   }
-
-// }
-
-//////////////////////////////////////////////
-
-//     var suits = ["hearts", "clubs", "diamonds", "spades"];
-//     var special =  ["ace", "jack", "king", "queens"];
-//     var img;
-
-// function Deck() {
-//   this.cards = function() {
-//     var draw = Math.floor(Math.random() * 4);
-//     var num = Math.floor(Math.random() * 10);
-//     if(num === 10){num = special[draw]};
-//     img =  num+"_of_"+suits[draw]+".png" ;
-//     return img
-//   }
-// }
-
-// var fullDeck = new Deck();
-
-// console.log(fullDeck.cards())
-
-
-
-/////    2nd draft   - ------ ---- --- -- - -     currently stuck
       var suits = ["hearts", "clubs", "diamonds", "spades"];
       var special =  ["ace", "jack", "king", "queen"];
       var img;
       var ace = false;
 
-       // var $div = $('<div>').addClass('color');
-       //    $div.css('border', '2px solid black');
-       //    $div.attr("thisCard", "whatever" ); ////added specific attribute called "thisColor"
-       //    $top.append($div);
-       //    var $div2 = $('<div>').addClass('color');
-       //    $div2.css('border', '2px solid black');
-       //    $div2.attr("thisCard", "whatever" ); ////added specific attribute called "thisColor"
-       //    $top.append($div2);
-       //    var $div3 = $('<div>').addClass('color');
-       //    $div3.css('border', '2px solid black');
-       //    $div3.attr("thisCard", "whatever" ); ////added specific attribute called "thisColor"
-       //    $top.append($div3);
+///////////////////////////////////////////----------------
+ // var randamize = function(a) {
+ //        if(a < 3){
+ //          a = Math.floor(Math.random() * 10);
+ //           randamize(a);
+ //        }else{
+ //          return a;
+ //        }
 
-  function Deck() {
+ //    };
+var allTheCards = new Object();
+allTheCards.name = this.name;
+
+var Deck = function() {
     this.total = 0;
     this.val = function(v) {
                this.total += v;
@@ -149,23 +83,42 @@ $double.text("DOUBLE");
             }
         }
 
-    this.cards = function() {
+
+
+    this.cards = function(j) {
+      // debugger
+
       var num2 = 10;
       var draw = Math.floor(Math.random() * 4);
-      draw = 0;
+      // draw = 0;
       var num = Math.floor(Math.random() * 11);
       // debugger
-      if(num < 2){ this.total = 0; this.cards()};
-      if(num < 3){ num = Math.floor(Math.random() * 12)}
+       // num = 1;
+       if(typeof j === "number"){num = 1}
+      if(num === 1){num = Math.floor(Math.random() * 11)};
+      // if(num < 3){ num = Math.floor(Math.random() * 12)}
+      if(num < 2){num = (Math.floor(Math.random() * 11)) < 3 ? (Math.floor(Math.random() * 12)) : 3;}
         // debugger
       if(num === 11 || num === 12){num = special[draw]; if(num != "ace"){this.val(num2)} this.check(special[draw]); console.log(special[draw])}; ////got help from Lamaj!! help me figure how to grab the value of each card selection
       img =  num+"_of_"+suits[draw]+".png";
-      if(special[draw] === "ace"){this.check(); console.log(ace)}
+      if(special[draw] === "ace"){this.check(); console.log(num)}
 
       if(typeof num === "number"){this.val(num)};
        if(num === "ace"){this.total = 1};
         console.log("i am"+this+" and the total is "+this.total)
       return img;
+    }
+
+    this.checkAllCards = function(){
+      // debugger
+      var pl1 = player1;
+      var dealer = houseCards;
+      if(this.total < 21){return}
+      // if(this.total === 21){alert("you win")};
+      if(this.total > player1.deck.total){alert("the Dealer wins")};
+      if(pl1.deck.total === 21){alert("you win")};
+      if(pl1.deck.total > houseCards.deck.total){alert("the Dealer wins")}
+
     }
     // this.winnerCheck = function() {
     //   if(this.total === 21){alert("you win")}
@@ -173,11 +126,13 @@ $double.text("DOUBLE");
     // }
   }////// Deck object end
 
+Deck.prototype = allTheCards;
+console.log(Deck.prototype);
+
+///////////////////////////--------------------------
 
 
-  // var fullDeck = new Deck();
-  // var houseDeck = fullDeck.cards;
-  ///////////// deck of 52 random cards
+
 
 
   function Player() {
@@ -186,8 +141,9 @@ $double.text("DOUBLE");
         this.currentCards = [];
         this.deck = new Deck();
         this.stand = function() {
+          // debugger
             this.totalHand = this.currentCards.length;
-            if(this.totalHand === this.currentCards){
+            if(this.totalHand === this.currentCards.length){
               $sidePanel.remove();
               $container.css("justify-content", "flex-start")
               var dealerShow = $('<div class="dealerHand">');
@@ -211,6 +167,7 @@ $double.text("DOUBLE");
         };
 
         this.hit = function() {
+          // debugger
           if(this.totalHand === this.currentCards.length){this.stand()};
           console.log(this);
           var c = this.currentCards;
@@ -246,12 +203,19 @@ $double.text("DOUBLE");
 
         } ///////// end of this.display
 
+      this.checkAllCards = function(){
+      // debugger
+
+      if(this.deck.total < 21){return}
+         if(this.deck.total > 21){alert("bust"); $sidePanel.remove();};
+      // if(this.total === 21){alert("you win")};
+      if(this.deck.total === 21){return alert("you win")};
+      if(this.deck.total > houseCards.deck.total){return alert("the Dealer wins")};
+
+    }
+
 
   };////// Player object end
-
-  // Player.prototype = fullDeck;
-
-  // console.log(Player.prototype);
 
 var player1 = new Player();
 console.log(player1);
@@ -260,25 +224,74 @@ player1.hand();
 player1.display(player1.currentCards);
 var player1Cards = player1.deck;
 console.log(player1.currentCards.length)
-// console.log(player1.__proto__);
-// console.log(player1Cards.cards);
-console.log(player1.deck.total);
+console.log(player1Cards.total);
+
+var addSideChildren = function(){
+  $hit.css({width: '50px', height: '50px', border: '3px solid'});
+  $hit.text("HIT");
+  $stand.css({width: '80px', height: '50px', border: '3px solid'});
+  $stand.text("STAND");
+  $double.css({width: '80px', height: '50px', border: '3px solid'});
+  $double.text("DOUBLE");
+  $hit.click(function() {
+    // debugger
+  player1.hit()
+  player1.checkAllCards()
+  // window.setTimeout(function(){
+  //   // debugger
+  //   houseCards.check();
+  //   houseCards.hit()
+  // }, 3000);
+
+  });
+
+$stand.click(function() {
+  $sidePanel.remove()
+   window.setTimeout(function(){
+    $('.black').removeClass('black');
+    debugger
+    houseCards.check();
+    // houseCards.hit()
+  }, 3000);
+});
+
+};
+
+addSideChildren();
 
 
-$hit.click(function() {player1.hit()});
-$stand.click(function() {player1.stand()});
 
-// setTimeout(player1.hit.bind(player1), 3000);  ///// got help from  other instructor..recommend bind()..
-////// since im using setTimout..this within my player1.hit function would refer to the window object
-////// iuse the method bind() to make sure "this" within my function refers to my object , which is player1 !
 
-////////////////////////------------------ house object----
 
 
 function House() {
         this.totalHand = 5;
         this.currentCards = [];
         this.deck = new Deck();
+        this.check = function() {
+          // debugger
+          console.log(this.deck.total)
+           // if(this.deck.total > 21 ){this.hit()};
+          if(this.deck.total < 16 ){this.hit()};
+          this.checkAllCards();
+          if(this.deck.total > 16 && this.deck.total <= 20){this.checkAllCards();};
+          if(this.deck.total === 21){alert("dealer wins!")};
+          this.checkAllCards();
+        }
+      this.stand = function() {
+          // debugger
+            this.totalHand = this.currentCards.length;
+            if(this.totalHand === this.currentCards.length){
+              $sidePanel.children().remove();
+              $total.css("justify-content", "space-around")
+              var dealerHand = $('<div class="dealerHand">');
+                dealerHand.css({width: "150px", height: "180px"});
+                dealerHand.text("Dealer hand");
+              $sidePanel.append(dealerHand)
+            }
+
+        }
+
         this.hand = function() {
           var cardOne = this.deck.cards();
           var cardTwo = this.deck.cards();;
@@ -289,10 +302,14 @@ function House() {
         };
 
         this.hit = function() {
+          // debugger
+          // this.check();
           if(this.currentCards.length < this.totalHand){
-                  var nextCard = this.deck.cards();
+                  var nextCard = this.deck.cards(1);
                   this.currentCards.push(nextCard);
                   this.display(this.currentCards);
+                  console.log(this.deck.total)
+                  this.check(this);
                   return this.currentCards;
           };
           return "total hand limit";
@@ -306,7 +323,7 @@ function House() {
             var $div = $('<div>').addClass('color');
             // $div.css('border', '2px solid black');
             $div.attr("thisCard", "whatever" ); ////added specific attribute called "thisColor"
-             if($top.children().length > 0){ $div.css("background-color", "black");  $top.append($div); return;}
+             // if($top.children().length > 0){ $div.addClass('black');  $top.append($div); return;}
               i = {
                   backgroundImage : "url(./cards/"+card+")",
                   backgroundSize: "contain",
@@ -318,6 +335,15 @@ function House() {
 
         } ///////// end of this.display
 
+      this.checkAllCards = function(){
+
+
+        // if(this.deck.total < 21){return}
+        // if(this.total === 21){alert("you win")};
+        if(this.deck.total > player1.deck.total){ return alert("the Dealer wins");};
+        if(this.deck.total < player1.deck.total){$('.black').removeClass('black'); return alert("player1 wins")}
+
+    }
 
   };////// Player object end
 
@@ -329,14 +355,15 @@ houseCards.display(houseCards.currentCards);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 });
-
-
-
-
-
-
-
-
-
-
