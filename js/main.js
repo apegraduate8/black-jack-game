@@ -105,9 +105,10 @@ $double.text("DOUBLE");
 
 
 /////    2nd draft   - ------ ---- --- -- - -     currently stuck
-  var suits = ["hearts", "clubs", "diamonds", "spades"];
+      var suits = ["hearts", "clubs", "diamonds", "spades"];
       var special =  ["ace", "jack", "king", "queen"];
       var img;
+      var ace = false;
 
        // var $div = $('<div>').addClass('color');
        //    $div.css('border', '2px solid black');
@@ -128,15 +129,36 @@ $double.text("DOUBLE");
                this.total += v;
               return this.total;
         }
+    this.check = function(ace) {
+            if(ace === "ace"){
+              var $aceDiv = $("<div class='ace'>");
+              $aceDiv.text("ACE value?");
+              $aceDiv.css({width: '80px', height: '50px', border: '2px solid'});
+              $sidePanel.append($aceDiv);
+              var $one = $("<div class='one'>");
+              $one.text("1");
+              $one.css({width: '80px', height: '50px', border: '2px solid'});
+              $sidePanel.append($one);
+              var $eleven = $("<div class='eleven'>");
+              $eleven.text("11");
+              $eleven.css({width: '80px', height: '50px', border: '2px solid'});
+              $sidePanel.append($eleven);
+
+            }
+        }
+
     this.cards = function() {
       var num2 = 10;
       var draw = Math.floor(Math.random() * 4);
       var num = Math.floor(Math.random() * 12);
-      if(num < 2){ num = Math.floor(Math.random() * 11)}
+      // debugger
+      if(num < 2){ this.cards()};
       if(num < 3){ num = Math.floor(Math.random() * 11)}
         // debugger
-      if(num === 11 || num === 12){num = special[draw]; this.val(num2)};
+      if(num === 11 || num === 12){num = special[draw]; this.val(num2); this.check(special[draw]); console.log(special[draw])}; ////got help from Lamaj!! help me figure how to grab the value of each card selection
       img =  num+"_of_"+suits[draw]+".png";
+      if(suits[draw] === "ace"){ace = true; this.check(); console.log(ace)}
+
       if(typeof num === "number"){this.val(num)};
         console.log(this.total)
       return img;
