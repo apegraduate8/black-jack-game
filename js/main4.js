@@ -34,7 +34,8 @@ var later = function() {
        }, 7000);
 }
 
-
+////   reference: https://api.jquery.com/submit/
+//// also for localStorage:  https://www.w3schools.com/HTML/html5_webstorage.asp
 
 if (typeof(Storage) !== "undefined") {
       localStorage.clear();   /////clearing that local storage

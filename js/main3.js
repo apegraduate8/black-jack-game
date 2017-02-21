@@ -1,5 +1,5 @@
 
-
+////wanted to add audio while youplay  ----- https://www.youtube.com/watch?v=meECq9NvPpc
 
 jQuery(document).ready(function($) {
 
@@ -37,7 +37,7 @@ var i;
 var deck = [];
 
 
-$( window ).resize(function(event) {
+$( window ).resize(function(event) {    //////https://developer.mozilla.org/en-US/docs/Web/API/Window/location
 location.reload()
 
 });
@@ -103,6 +103,7 @@ var removeChildren = function() {
 
 var one = true;
 //////////////////
+
 var deck =  {
 
     total: 0,
@@ -114,7 +115,7 @@ var deck =  {
     sentence: "",
     a: function(win) {
 
-      var rndm = Math.floor(Math.random() * 7)
+      var rndm = Math.floor(Math.random() * 5)
       this.num = Math.floor(Math.random() * 13)
       this.draw = Math.floor(Math.random() * 4)
       if(win){this.num = rndm}
@@ -160,7 +161,7 @@ var Dealer =  function(type) {
           this.currentCards.push(cardTwo);
           console.log(this.currentCards);
         }
-         if(first === 1){ var cardOne = this.a();  this.currentCards.push(cardOne)};
+        if(first === 1){ var cardOne = this.a();  this.currentCards.push(cardOne)};
     }
 
     this.hitDealer = function() { /////special card for dealer "advantage"..when dealer has less than 16
@@ -173,10 +174,10 @@ var Dealer =  function(type) {
       if(this.total === 21){$sidePanel.remove(); return this.win("player")};
       if(this.type === "dealer"){return};
       if(player1.ace[0] === "ace" && player1.ace.length >= 1){
-        console.log(this.type);
-        console.log(player1.ace);
+              // console.log(this.type);
+              // console.log(player1.ace);
               // removeChildren();
-        var $acePanel = $('<div class="acePanel">');
+              var $acePanel = $('<div class="acePanel">');
               $sidePanel.append($acePanel)
               var $aceDiv = $("<div class='ace'>");
               $aceDiv.text("select  your ACE value?");
@@ -207,13 +208,13 @@ var Dealer =  function(type) {
                 player1.player1Check()  ////only want tocheck if player gets above 21 ...dont have to check below
              });
 ////--- one button
-              $one.click(function(){
-                console.log("and player1 total : "+player1.total);
+                 $one.click(function(){
+                 console.log("and player1 total : "+player1.total);
                  player1.ace = [];
                  $one.off("click");
                  $acePanel.remove();
                  $hit.css("pointer-events", "auto");
-                $betH3.text(PlayersName+" cards: "+player1.total)
+                 $betH3.text(PlayersName+" cards: "+player1.total)
 
               });
           };
@@ -229,7 +230,7 @@ var Dealer =  function(type) {
           if(this.total === 21){this.win("Dealer")}
         }
       this.finalCheck = function() {
-        // if(this.totalHand === this.currentCards.length){this.stand()};  ///////the dealer makes FINAL CHECKS
+            // if(this.totalHand === this.currentCards.length){this.stand()};  ///////the dealer makes FINAL CHECKS
             if(this.total === player1.total){return this.win("Dealer")}
             if(this.total > player1.total){return this.win("Dealer")}
             if(this.total < player1.total){this.win("Player")}
@@ -257,7 +258,7 @@ var Dealer =  function(type) {
 
 
       this.stand = function() {
-        this.totalHand = this.currentCards.length;
+          this.totalHand = this.currentCards.length;
           if(this.totalHand === this.currentCards.length){
             $sidePanel.children().remove();
             $total.css("justify-content", "space-around");
@@ -286,7 +287,7 @@ var Dealer =  function(type) {
 
 ///////// only called if there is a winner
       this.win = function(winner) {
-        $('.winner').remove();
+          $('.winner').remove();
           var $div = $('<div>').addClass('winner');
           var $h1 = $('<h1>').addClass('h1Winner');
           var $butt = $('<button>').addClass('winButton');
@@ -307,7 +308,6 @@ var Dealer =  function(type) {
     Dealer.prototype = deck; //// setting the prototype for dealer constructs
     var dealer = new Dealer("dealer"); /// dealer instance ....inherits from deck object above
     var player1 = new Dealer("player"); //// player1 instance
-
 
 
     /////////////////////////////////      starts game
