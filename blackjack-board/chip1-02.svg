@@ -1,0 +1,48 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 138 142">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #9e005d;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        font-size: 14px;
+      }
+
+      .cls-3, .cls-6 {
+        fill: #8cc63f;
+      }
+
+      .cls-3, .cls-4 {
+        font-family: BourbonGrotesque-Regular, Bourbon Grotesque;
+      }
+
+      .cls-4 {
+        font-size: 24px;
+      }
+
+      .cls-5 {
+        letter-spacing: -0.02em;
+      }
+    </style>
+  </defs>
+  <title>chip1</title>
+  <g id="chip1">
+    <path class="cls-1" d="M132,71A63.9,63.9,0,1,1,83.77,9,64,64,0,0,1,132,71Z"/>
+    <circle class="cls-2" cx="68" cy="71" r="42"/>
+    <text class="cls-3" transform="translate(47.04 51.11) rotate(-25.25) scale(0.98 1)">r</text>
+    <text class="cls-3" transform="translate(55.65 46.82) rotate(-10.78) scale(0.98 1)">o</text>
+    <text class="cls-3" transform="translate(65.14 44.75) rotate(2.93) scale(0.98 1)">y</text>
+    <text class="cls-3" transform="translate(74.13 44.89) rotate(15.63) scale(0.98 1)">a</text>
+    <text class="cls-3" transform="matrix(0.85, 0.48, -0.5, 0.87, 84.73, 47.89)">l</text>
+    <text class="cls-4" transform="translate(47.24 78.56)">1<tspan class="cls-5" x="10.97" y="0">0</tspan><tspan x="27.19" y="0">0</tspan></text>
+    <path class="cls-6" d="M27.8,83.21,6,87a64.68,64.68,0,0,1-.69-29l21.91,2.9a41.34,41.34,0,0,0-1.17,7.92l0,.61c0,.24,0,.49,0,.75s0,.54,0,.82c0,.53,0,1,0,1.49s.07,1.14.12,1.71A41.8,41.8,0,0,0,27.8,83.21Z"/>
+    <path class="cls-6" d="M83.28,133.16a64.45,64.45,0,0,1-31.76-.3l3.9-21.78a42.2,42.2,0,0,0,25,0Z"/>
+    <path d="M83.77,9,80,30.92a40.79,40.79,0,0,0-7.86-1.53l-.61-.06-.75,0-.81,0-1.49,0c-.59,0-1.15,0-1.72,0a41.09,41.09,0,0,0-9.07,1.31L54.87,8.35A63.85,63.85,0,0,1,68,7,64.51,64.51,0,0,1,83.77,9Z"/>
+    <path class="cls-6" d="M108,58.79,130,55a64.16,64.16,0,0,1,.7,29l-22.09-2.9a41,41,0,0,0,1.18-7.92l0-.61c0-.24,0-.49,0-.75s0-.54,0-.82c0-.53,0-1,0-1.49s-.07-1.14-.12-1.71A41.49,41.49,0,0,0,108,58.79Z"/>
+  </g>
+</svg>
